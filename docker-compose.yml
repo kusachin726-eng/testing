@@ -17,3 +17,13 @@ services:
     image: grafana/grafana
     ports:
       - "3001:3000"
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.47.2
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
