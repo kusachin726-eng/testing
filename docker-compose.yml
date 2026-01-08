@@ -1,10 +1,24 @@
 version: "3.8"
 
 services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - node-app
+    networks:
+      - monitoring
+
   node-app:
     build: .
     ports:
       - "3000:3000"
+    networks:
+      - monitoring
 
   prometheus:
     image: prom/prometheus
